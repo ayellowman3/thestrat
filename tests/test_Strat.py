@@ -118,5 +118,16 @@ class TestStrat(unittest.TestCase):
         self.assertEqual(Strat.get_label(Candle.Candle("AAPL", 144.89, 144.89, 144.77, 144.77),Candle.Candle("AAPL", 144.75, 144.75, 144.61, 144.61)),2)
         self.assertEqual(Strat.get_label(Candle.Candle("AAPL", 144.75, 144.75, 144.61, 144.61),Candle.Candle("AAPL", 144.61, 144.61, 144.4, 144.57)),2)
 
+    def test_populate_number(self):
+        Strat.populate_number(self.candles)
+        for candle in self.candles:
+            if candle.number==2:
+                if candle.close>candle.open:
+                    self.assertEqual(candle.direction,"U")
+                else:
+                    self.assertEqual(candle.direction,"D")
+            else:
+                self.assertEqual(candle.direction,None)
+
 if __name__ == '__main__':
     unittest.main()
